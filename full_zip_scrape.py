@@ -1,8 +1,6 @@
 import csv
 import requests
 import json
-import argparse
-import traceback
 import pandas as pd
 import time 
 import urllib3
