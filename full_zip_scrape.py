@@ -65,13 +65,14 @@ if __name__=="__main__":
     zipcodes = get_stores()
     storecount = 0
     rows_list = []
+    SLEEP_TIME = 1
     try :
         for zipcode in zipcodes:
             scraped_data = locate_stores(zipcode)
             if scraped_data:
                 print (f"Scraped data for zipcode {zipcode}")
                 rows_list.extend(scraped_data)
-                time.sleep(1)
+                time.sleep(SLEEP_TIME)
 
     except Exception as e:
         print (e)
