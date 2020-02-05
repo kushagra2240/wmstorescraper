@@ -11,7 +11,7 @@ setuptools.setup(
     description="A basic scraper to find walmart stores nearby all pincodes in USA",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/kushagra2240/wmstorescraper.git",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
