@@ -8,7 +8,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def locate_stores(zip_code):
 
-    url = f"https://www.walmart.com/store/finder/electrode/api/stores?singleLineAddr={zip_code}&serviceTypes=pharmacy&distance=50"
+    # url = f"https://www.walmart.com/store/finder/electrode/api/stores?singleLineAddr={zip_code}&serviceTypes=pharmacy&distance=50"
+    url = f"https://www.walmart.com/store/finder/electrode/api/stores?singleLineAddr={zip_code}&distance=50"
     headers = { 'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                 'accept-encoding':'gzip, deflate, br',
                 'accept-language':'en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7',
@@ -37,6 +38,9 @@ def locate_stores(zip_code):
                 city = store.get("address").get("city")
                 phone = store.get("phone")
                 distance = store.get("distance")
+                geolocation = store.get("geoPoint")
+                latitude = geolocation["latitude"]
+                longitude = geolocation["longitude"]
 
                 data = {
                         "name":display_name,
@@ -46,6 +50,8 @@ def locate_stores(zip_code):
                         "city":city,
                         "store_id":store_id,
                         "phone":phone,
+                        "latitude":latitude,
+                        "longitude":longitude
                 }
                 stores.append(data)
             return stores
@@ -65,14 +71,14 @@ if __name__=="__main__":
     zipcodes = get_stores()
     storecount = 0
     rows_list = []
-    SLEEP_TIME = 1
+    locate_stores(10027)
     try :
         for zipcode in zipcodes:
             scraped_data = locate_stores(zipcode)
             if scraped_data:
                 print (f"Scraped data for zipcode {zipcode}")
                 rows_list.extend(scraped_data)
-                time.sleep(SLEEP_TIME)
+                # time.sleep(1)
 
     except Exception as e:
         print (e)
